@@ -7,5 +7,5 @@ from django.http import HttpResponse
 def home(request):
     return render (request, 'homepage.html')
 
-def another(request):
-    return HttpResponse("Another requestssssss")
+def search_results(request):
+    return render (request, 'searchresults.html')

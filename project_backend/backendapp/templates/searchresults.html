@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'css/searchresults.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Search Results</h1>
+    </header>
+
+    <main>
+        <div class="search-results">
+            <div class="result-item">
+                <h2>Company 1</h2>
+                <p>Luxury vehicles and services</p>
+                <a href="company-profile.html">View Profile</a>
+            </div>
+            <div class="result-item">
+                <h2>Company 2</h2>
+                <p>Expert car repairs</p>
+                <a href="company-profile.html">View Profile</a>
+            </div>
+            <!-- Add more results as needed -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AutoConnect</p>
+    </footer>
+</body>
+</html>
