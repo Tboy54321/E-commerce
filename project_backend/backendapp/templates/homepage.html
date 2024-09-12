@@ -1,13 +1,15 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automobile Platform - Home</title>
-    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-</head>
-<body>
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock %}
+
+{% block content %}
     <header>
         <div class="navbar">
             <h1>AutoConnect</h1>
@@ -36,24 +38,14 @@
         <section class="featured">
             <h3>Featured Companies</h3>
             <div class="company-list">
-                <div class="company-card">
-                    <img src="company1.jpg" alt="Company 1">
-                    <h4>Company 1</h4>
-                    <p>Specializing in luxury vehicles.</p>
-                    <button>Contact</button>
-                </div>
-                <div class="company-card">
-                    <img src="company2.jpg" alt="Company 2">
-                    <h4>Company 2</h4>
-                    <p>Expert car repair services.</p>
-                    <button>Contact</button>
-                </div>
-                <div class="company-card">
-                    <img src="company3.jpg" alt="Company 3">
-                    <h4>Company 3</h4>
-                    <p>Trusted vehicle dealerships.</p>
-                    <button>Contact</button>
-                </div>
+                {% for state in context %}
+                    <div class="company-card">
+                        <img src="company{{ state.id }}.jpg" alt="Company {{ state.id }}">
+                        <h4>Company {{ state.id }}</h4>
+                        <p>{{ state.title }}</p>
+                        <button>Contact</button>
+                    </div>
+                {% endfor %}
             </div>
         </section>
     </main>
@@ -61,5 +53,4 @@
     <footer>
         <p>&copy; 2024 AutoConnect. All rights reserved.</p>
     </footer>
-</body>
-</html>
+{% endblock %}

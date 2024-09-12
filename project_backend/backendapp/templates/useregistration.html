@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    User Registration
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/useregistration.css' %}">
+{% endblock %}
+
+{% block content %}
     <header>
         <h1>User Registration</h1>
     </header>
@@ -23,5 +26,4 @@
     <footer>
         <p>&copy; 2024 AutoConnect</p>
     </footer>
-</body>
-</html>
+{% endblock %}
