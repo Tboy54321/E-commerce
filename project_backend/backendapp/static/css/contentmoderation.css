@@ -1,0 +1,36 @@
+.moderation-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.moderation-table th, .moderation-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.moderation-table th {
+    background-color: #f4f4f4;
+}
+
+.moderation-table button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.moderation-table button:hover {
+    background-color: #45a049;
+}
+
+.moderation-table button:nth-child(2) {
+    background-color: #ff0000;
+}
+
+.moderation-table button:nth-child(2):hover {
+    background-color: #cc0000;
+}
