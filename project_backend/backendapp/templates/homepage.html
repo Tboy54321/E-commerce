@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automobile Platform - Home</title>
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1>AutoConnect</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Companies</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Find Trusted Automobile Companies</h2>
+            <p>Search and connect with the best car services and dealerships.</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search companies..." />
+                <button type="button">Search</button>
+            </div>
+        </section>
+
+        <section class="featured">
+            <h3>Featured Companies</h3>
+            <div class="company-list">
+                <div class="company-card">
+                    <img src="company1.jpg" alt="Company 1">
+                    <h4>Company 1</h4>
+                    <p>Specializing in luxury vehicles.</p>
+                    <button>Contact</button>
+                </div>
+                <div class="company-card">
+                    <img src="company2.jpg" alt="Company 2">
+                    <h4>Company 2</h4>
+                    <p>Expert car repair services.</p>
+                    <button>Contact</button>
+                </div>
+                <div class="company-card">
+                    <img src="company3.jpg" alt="Company 3">
+                    <h4>Company 3</h4>
+                    <p>Trusted vehicle dealerships.</p>
+                    <button>Contact</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AutoConnect. All rights reserved.</p>
+    </footer>
+</body>
+</html>
