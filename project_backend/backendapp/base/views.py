@@ -21,7 +21,13 @@ def search_results(request, pk):
     return render (request, 'searchresults.html')
 
 def userlogin(request):
-    return render (request, 'userlogin.html')
+    return render (request, 'Userlogin.html')
 
 def usereg(request):
-    return render (request, 'useregistration.html')
+    return render (request, 'Useregistration.html')
+
+def aboutus(request):
+    return render (request, 'Aboutus.html')
+
+def companieslist(request):
+    return render (request, 'Listofcompanies.html')
