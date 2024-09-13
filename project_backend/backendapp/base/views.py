@@ -12,7 +12,12 @@ context = [
 def home(request):
     return render (request, 'homepage.html', {"context": context})
 
-def search_results(request):
+def search_results(request, pk):
+    # name = None
+    # for i in context:
+    #     if i['id'] == pk:
+    #         name = i
+    # return render (request, 'searchresults.html', {"name": name})
     return render (request, 'searchresults.html')
 
 def userlogin(request):
