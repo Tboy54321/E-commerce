@@ -31,3 +31,24 @@ def aboutus(request):
 
 def companieslist(request):
     return render (request, 'Listofcompanies.html')
+
+def companyreg(request):
+    return render (request, 'Companyreg.html')
+
+def contactcompany(request):
+    return render (request, 'Contactcompany.html')
+
+def companydashboard(request):
+    return render (request, 'Companydashboard.html')
+
+def companyprofile(request):
+    return render (request, 'Companyprofile.html')
+
+def usernotifcation(request):
+    return render (request, 'Usernotification.html')
+
+def companynotifcation(request):
+    return render (request, 'Companynotification.html')
+
+def contactus(request):
+    return render (request, 'Contactus.html')

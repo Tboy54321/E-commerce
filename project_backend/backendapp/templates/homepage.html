@@ -20,6 +20,15 @@ Home Page
                     <li><a href="{% url 'Aboutus' %}">About</a></li>
                     <li><a href="{% url 'Userlogin' %}">Login</a></li>
                     <li><a href="{% url 'Usereg' %}">Sign up</a></li>
+                    <li><a href="{% url 'Company reg' %}">Register your company</a></li>
+                    <li><a href="{% url 'Contact company' %}">Contact compaines</a></li>
+                    <!-- If user is logged in -->
+                    <li><a href="{% url 'User notification' %}">User notification</a></li>
+                    <!-- IF logged in as company -->
+                    <li><a href="{% url 'Company dashboard' %}">Company dashboard</a></li>
+                    <li><a href="{% url 'Company profile' %}">Company profile</a></li>
+                    <li><a href="{% url 'Company notification' %}">Company notification</a></li>
+                    <li><a href="{% url 'Contact us' %}">Contact us</a></li>
                 </ul>
             </nav>
         </div>

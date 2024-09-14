@@ -1,29 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Profile</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Company Name</h1>
-    </header>
+{% extends 'base.html' %}
+{% load static %}
 
-    <main>
-        <section class="company-details">
-            <h2>About the Company</h2>
-            <p>Details about the company, services offered, and more.</p>
+{% block title %}
+Home Page
+{% endblock %}
 
-            <h3>Contact Information</h3>
-            <p>Email: info@company.com</p>
-            <p>Phone: (123) 456-7890</p>
-        </section>
-    </main>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/companyprofile.css' %}">
+{% endblock %}
 
-    <footer>
-        <p>&copy; 2024 AutoConnect</p>
-    </footer>
-</body>
-</html>
+{% block content %}
+<header>
+    <h1>Company Name</h1>
+</header>
+
+<main>
+    <section class="company-details">
+        <h2>About the Company</h2>
+        <p>Details about the company, services offered, and more.</p>
+
+        <h3>Contact Information</h3>
+        <p>Email: info@company.com</p>
+        <p>Phone: (123) 456-7890</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 AutoConnect</p>
+</footer>
+{% endblock %}

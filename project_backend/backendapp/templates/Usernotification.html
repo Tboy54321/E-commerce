@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/Usernotification.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>User Notifications</h1>
+    </header>
+
+    <main>
+        <div class="notification-list">
+            <div class="notification-item">
+                <h3>Booking Confirmed</h3>
+                <p>Your booking with XYZ Auto Repair has been confirmed.</p>
+                <span class="notification-time">2 hours ago</span>
+            </div>
+            <div class="notification-item">
+                <h3>New Offer from ABC Motors</h3>
+                <p>ABC Motors is offering a 20% discount on all services this week.</p>
+                <span class="notification-time">1 day ago</span>
+            </div>
+            <div class="notification-item">
+                <h3>Review Approved</h3>
+                <p>Your review for Global Auto Traders has been approved and published.</p>
+                <span class="notification-time">3 days ago</span>
+            </div>
+            <!-- More notifications here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AutoConnect</p>
+    </footer>
+{% endblock %}

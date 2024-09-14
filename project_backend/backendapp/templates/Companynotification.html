@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/Companynotification.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>Company Notifications</h1>
+    </header>
+
+    <main>
+        <div class="notification-list">
+            <div class="notification-item">
+                <h3>New Booking Request</h3>
+                <p>You have received a new booking request from John Doe.</p>
+                <span class="notification-time">1 hour ago</span>
+            </div>
+            <div class="notification-item">
+                <h3>Profile Approved</h3>
+                <p>Your company profile has been approved and is now live.</p>
+                <span class="notification-time">2 days ago</span>
+            </div>
+            <div class="notification-item">
+                <h3>New Review</h3>
+                <p>You have received a new review from Jane Smith.</p>
+                <span class="notification-time">3 days ago</span>
+            </div>
+            <!-- More notifications here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AutoConnect</p>
+    </footer>
+{% endblock %}
