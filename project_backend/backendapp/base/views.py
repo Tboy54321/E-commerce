@@ -67,6 +67,18 @@ def updateCompanyInfo(request, pk):
     context = {'form': form}
     return render(request, 'Companyreg.html', context)
 
+
+def deleteCompanyInfo(request, pk):
+    company = Companies.objects.get(id=pk)
+    context = {'obj': company}
+    if request.method == 'POST':
+        company.delete()
+        return redirect('Home')
+
+    return render(request, 'delete.html', context)
+    
+    
+
 def contactcompany(request):
     return render (request, 'Contactcompany.html')
 

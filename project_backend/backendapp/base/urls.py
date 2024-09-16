@@ -10,6 +10,7 @@ urlpatterns = [
     path('companies/', views.companieslist, name='Companies'),
     path('company-reg/', views.companyreg, name="CompanyReg"),
     path('update-company/<str:pk>/', views.updateCompanyInfo, name="UpdateCompany"),
+    path('delete-company/<str:pk>/', views.deleteCompanyInfo, name="DeleteCompany"),
     path('contact-company/', views.contactcompany, name="Contact company"),
     path('company-dashboard/', views.companydashboard, name="Company dashboard"),
     path('company-profile/', views.companyprofile, name="Company profile"),

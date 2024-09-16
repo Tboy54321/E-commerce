@@ -18,6 +18,8 @@
                 <h2>{{company.email}}</h2>
                 <p>Luxury vehicles and services</p>
                 <a href="{% url 'UpdateCompany' company.id %}">Update Profile</a>
+                <hr>
+                <a href="{% url 'DeleteCompany' company.id %}">Delete Profile</a>
             </div>
             <!-- Add more results as needed -->
         </div>
