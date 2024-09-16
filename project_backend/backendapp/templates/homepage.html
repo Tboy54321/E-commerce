@@ -20,7 +20,7 @@ Home Page
                     <li><a href="{% url 'Aboutus' %}">About</a></li>
                     <li><a href="{% url 'Userlogin' %}">Login</a></li>
                     <li><a href="{% url 'Usereg' %}">Sign up</a></li>
-                    <li><a href="{% url 'Company reg' %}">Register your company</a></li>
+                    <li><a href="{% url 'CompanyReg' %}">Register your company</a></li>
                     <li><a href="{% url 'Contact company' %}">Contact compaines</a></li>
                     <!-- If user is logged in -->
                     <li><a href="{% url 'User notification' %}">User notification</a></li>
@@ -47,13 +47,15 @@ Home Page
         <section class="featured">
             <h3>Featured Companies</h3>
             <div class="company-list">
-                {% for state in context %}
-                    <div class="company-card">
-                        <img src="company{{ state.id }}.jpg" alt="Company {{ state.id }}">
-                        <h4>Company {{ state.id }}</h4>
-                        <p>{{ state.title }}</p>
-                        <button>Contact</button>
-                    </div>
+                {% for company in companies %}
+                    <a href="{% url 'searchresults' company.id %}">
+                        <div class="company-card">
+                            <img src="company{{ company.id }}.jpg" alt="Company {{ company.id }}">
+                            <h4>Company {{ company.id }}</h4>
+                            <p>{{ company.email }}</p>
+                            <button>Contact</button>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         </section>

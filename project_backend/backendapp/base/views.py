@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .form import RegForm, LoginForm
+from .models import Companies
 
 
 # Create your views here.
@@ -10,18 +12,27 @@ context = [
 ]
 
 def home(request):
-    return render (request, 'homepage.html', {"context": context})
+    companies = Companies.objects.all()
+    context = {'companies': companies}
+    return render (request, 'homepage.html', context)
 
 def search_results(request, pk):
-    # name = None
-    # for i in context:
-    #     if i['id'] == pk:
-    #         name = i
-    # return render (request, 'searchresults.html', {"name": name})
-    return render (request, 'searchresults.html')
+    company = Companies.objects.get(id=pk)
+    # print(name)
+    return render (request, 'searchresults.html', {"company": company})
+    # return render (request, 'searchresults.html')
 
 def userlogin(request):
-    return render (request, 'Userlogin.html')
+    formss = LoginForm()
+
+    if request.method == "POST":
+        formss = LoginForm(request.POST)
+        if formss.is_valid():
+            formss.save()
+            return redirect('Home')
+        
+    context = {'form': formss}
+    return render (request, 'Userlogin.html', context)
 
 def usereg(request):
     return render (request, 'Useregistration.html')
@@ -33,7 +44,28 @@ def companieslist(request):
     return render (request, 'Listofcompanies.html')
 
 def companyreg(request):
-    return render (request, 'Companyreg.html')
+    forms = RegForm()
+
+    if request.method == "POST":
+        forms = RegForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('Home')
+
+    context = {'form': forms}
+    return render (request, 'Companyreg.html', context)
+
+
+def updateCompanyInfo(request, pk):
+    company = Companies.objects.get(id=pk)
+    form = RegForm(instance=company)
+    if request.method == "POST":
+        form = RegForm(request.POST, instance=company)
+        if form.is_valid:
+            form.save()
+            return redirect('Home')
+    context = {'form': form}
+    return render(request, 'Companyreg.html', context)
 
 def contactcompany(request):
     return render (request, 'Contactcompany.html')
@@ -42,7 +74,9 @@ def companydashboard(request):
     return render (request, 'Companydashboard.html')
 
 def companyprofile(request):
-    return render (request, 'Companyprofile.html')
+    companies = Companies.objects.all()
+    context = {'companies': companies}
+    return render (request, 'Companyprofile.html', context)
 
 def usernotifcation(request):
     return render (request, 'Usernotification.html')

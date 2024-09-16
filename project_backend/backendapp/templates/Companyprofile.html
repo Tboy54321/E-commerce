@@ -10,21 +10,27 @@ Home Page
 {% endblock %}
 
 {% block content %}
-<header>
-    <h1>Company Name</h1>
-</header>
+{% for company in companies %}
+    <header>
+        <h1>{{company.name}}</h1>
+        
+    </header>
 
-<main>
-    <section class="company-details">
-        <h2>About the Company</h2>
-        <p>Details about the company, services offered, and more.</p>
+    <main>
+        <section class="company-details">
+            <h2>About the Company</h2>
+            <p>{{company.address}}</p>
 
-        <h3>Contact Information</h3>
-        <p>Email: info@company.com</p>
-        <p>Phone: (123) 456-7890</p>
-    </section>
-</main>
+            <h3>Contact Information</h3>
+            <p>Email: {{company.email}}</p>
+            <p>Phone: (123) 456-7890</p>
+            <p>{{company.website}}</p>
+            <p>{{company.indusry}}</p>
+            <a href="">Update Profile</a>
+        </section>
+    </main>
 
+{% endfor %}
 <footer>
     <p>&copy; 2024 AutoConnect</p>
 </footer>

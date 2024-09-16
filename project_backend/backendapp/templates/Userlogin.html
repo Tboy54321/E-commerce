@@ -15,10 +15,16 @@
     </header>
 
     <main>
-        <form class="user-form">
+        <!-- <form class="user-form">
             <input type="email" placeholder="Email" required>
             <input type="password" placeholder="Password" required>
             <button type="submit">Login</button>
+        </form> -->
+        <form class="user-form" method="POST" action="">
+            {% csrf_token %}
+            
+            {{ form }}
+            <input type="submit" value="Submit">
         </form>
     </main>
 

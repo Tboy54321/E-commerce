@@ -15,14 +15,9 @@
     <main>
         <div class="search-results">
             <div class="result-item">
-                <h2>Company 1</h2>
+                <h2>{{company.email}}</h2>
                 <p>Luxury vehicles and services</p>
-                <a href="company-profile.html">View Profile</a>
-            </div>
-            <div class="result-item">
-                <h2>Company 2</h2>
-                <p>Expert car repairs</p>
-                <a href="company-profile.html">View Profile</a>
+                <a href="{% url 'UpdateCompany' company.id %}">Update Profile</a>
             </div>
             <!-- Add more results as needed -->
         </div>
