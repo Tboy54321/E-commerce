@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from .form import RegForm, LoginForm
 from .models import Companies
 
 
 # Create your views here.
-context = [
-    {"id": "1", "title": "Specializing in luxury vehicles."},
-    {"id": "2", "title": "Expert car repair services."},
-    {"id": "3", "title": "Trusted vehicle dealerships."}
-]
+# context = [
+#     {"id": "1", "title": "Specializing in luxury vehicles."},
+#     {"id": "2", "title": "Expert car repair services."},
+#     {"id": "3", "title": "Trusted vehicle dealerships."}
+# ]
 
 def home(request):
     companies = Companies.objects.all()
