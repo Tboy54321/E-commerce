@@ -48,14 +48,14 @@ Home Page
             <h3>Featured Companies</h3>
             <div class="company-list">
                 {% for company in companies %}
-                    <a href="{% url 'searchresults' company.id %}">
-                        <div class="company-card">
-                            <img src="company{{ company.id }}.jpg" alt="Company {{ company.id }}">
-                            <h4>Company {{ company.id }}</h4>
-                            <p>{{ company.email }}</p>
-                            <button>Contact</button>
-                        </div>
-                    </a>
+                    <div class="company-card">
+                        <img src="company{{ company.id }}.jpg" alt="Company {{ company.id }}">
+                        <h4>{{ company.name }}</h4>
+                        <p>{{ company.email }}</p>
+                        <a href="{% url 'searchresults' company.id %}">
+                            <button>View profile</button>
+                        </a>
+                    </div>
                 {% endfor %}
             </div>
         </section>

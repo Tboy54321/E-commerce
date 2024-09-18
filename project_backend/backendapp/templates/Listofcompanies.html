@@ -14,20 +14,19 @@
         <h1>Companies</h1>
     </header>
 
+    <form class="search-bar" method="GET" action="{% url 'Companies' %}">
+        <input type="text" name="q" placeholder="Search companies..." />
+        <button type="submit">Search</button>
+    </div>
+
     <main>
         <div class="company-list">
-            <div class="company-item">
-                <a href="/company-details.html?id=1">ABC Motors</a>
-                <p>ABC Motors specializes in luxury vehicles and offers a wide range of services.</p>
-            </div>
-            <div class="company-item">
-                <a href="/company-details.html?id=2">XYZ Auto Repair</a>
-                <p>XYZ Auto Repair is known for affordable and reliable car repair services.</p>
-            </div>
-            <div class="company-item">
-                <a href="/company-details.html?id=3">Global Auto Traders</a>
-                <p>Global Auto Traders offers both new and pre-owned cars at competitive prices.</p>
-            </div>
+            {% for company in companies %}
+                <div class="company-item">
+                    <a href="{% url 'Companies' %}?q={{ company.name }}">{{ company.name }}</a>
+                    <p>{{ company.email }}.</p>
+                </div>
+            {% endfor %}
             <!-- Add more companies here -->
         </div>
     </main>

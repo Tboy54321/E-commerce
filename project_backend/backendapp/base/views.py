@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from django.http import HttpResponse
 from .form import RegForm, LoginForm
 from .models import Companies
@@ -40,9 +41,16 @@ def usereg(request):
 def aboutus(request):
     return render (request, 'Aboutus.html')
 
-def companieslist(request):
-    return render (request, 'Listofcompanies.html')
 
+# Implementation of search functionality
+def companieslist(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    companies = Companies.objects.filter(Q(name__icontains=q))
+    context = {'companies': companies}
+    return render (request, 'Listofcompanies.html', context)
+
+
+# Implementation of write functionality
 def companyreg(request):
     forms = RegForm()
 
@@ -56,6 +64,8 @@ def companyreg(request):
     return render (request, 'Companyreg.html', context)
 
 
+
+# Implementation of update functionality
 def updateCompanyInfo(request, pk):
     company = Companies.objects.get(id=pk)
     form = RegForm(instance=company)
@@ -68,6 +78,7 @@ def updateCompanyInfo(request, pk):
     return render(request, 'Companyreg.html', context)
 
 
+# Implementation of delete functionality
 def deleteCompanyInfo(request, pk):
     company = Companies.objects.get(id=pk)
     context = {'obj': company}
