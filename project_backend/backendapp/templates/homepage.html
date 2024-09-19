@@ -18,16 +18,16 @@ Home Page
                     <li><a href="{% url 'Home' %}">Home</a></li>
                     <li><a href="{% url 'Companies' %}">Companies</a></li>
                     <li><a href="{% url 'Aboutus' %}">About</a></li>
-                    <li><a href="{% url 'Userlogin' %}">Login</a></li>
-                    <li><a href="{% url 'Usereg' %}">Sign up</a></li>
+                    <li><a href="{% url 'Userlogin' %}">UserLogin</a></li>
+                    <li><a href="{% url 'Companylogin' %}">CompanyLogin</a></li>
+                    <li><a href="{% url 'Usereg' %}">User Sign up</a></li>
                     <li><a href="{% url 'CompanyReg' %}">Register your company</a></li>
-                    <li><a href="{% url 'Contact company' %}">Contact compaines</a></li>
+                    <li><a href="{% url 'contact_company' %}">Contact compaines</a></li>
                     <!-- If user is logged in -->
                     <li><a href="{% url 'User notification' %}">User notification</a></li>
                     <!-- IF logged in as company -->
-                    <li><a href="{% url 'Company dashboard' %}">Company dashboard</a></li>
                     <li><a href="{% url 'Company profile' %}">Company profile</a></li>
-                    <li><a href="{% url 'Company notification' %}">Company notification</a></li>
+                    <li><a href="{% url 'Company-notification' %}">Company notification</a></li>
                     <li><a href="{% url 'Contact us' %}">Contact us</a></li>
                 </ul>
             </nav>
@@ -38,25 +38,30 @@ Home Page
         <section class="hero">
             <h2>Find Trusted Automobile Companies</h2>
             <p>Search and connect with the best car services and dealerships.</p>
-            <div class="search-bar">
-                <input type="text" placeholder="Search companies..." />
-                <button type="button">Search</button>
-            </div>
+            <form class="search-bar" method="GET" action="{% url 'Home' %}">
+                <input type="text" name="q" placeholder="Search companies..." />
+                <button type="submit">Search</button>
+            </form>
+            
         </section>
 
         <section class="featured">
             <h3>Featured Companies</h3>
             <div class="company-list">
-                {% for company in companies %}
-                    <div class="company-card">
-                        <img src="company{{ company.id }}.jpg" alt="Company {{ company.id }}">
-                        <h4>{{ company.name }}</h4>
-                        <p>{{ company.email }}</p>
-                        <a href="{% url 'searchresults' company.id %}">
-                            <button>View profile</button>
-                        </a>
-                    </div>
-                {% endfor %}
+                {% if companies %}
+                    {% for company in companies %}
+                        <div class="company-card">
+                            <img src="company{{ company.id }}.jpg" alt="Company {{ company.id }}">
+                            <h4>{{ company.name }}</h4>
+                            <p>{{ company.email }}</p>
+                            <a href="{% url 'searchresults' company.id %}">
+                                <button>View profile</button>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h4>Your search did not match any company profile.</h4>
+                {% endif %}
             </div>
         </section>
     </main>

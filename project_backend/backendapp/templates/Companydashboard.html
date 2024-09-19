@@ -17,12 +17,13 @@ Home Page
 <main>
     <div class="dashboard">
         <div class="dashboard-item">
-            <h2>Manage Profile</h2>
-            <p>Update company details and contact info.</p>
+            <h2>{{ company.name }}</h2>
+            <p>{{ company.address }}</p>
         </div>
         <div class="dashboard-item">
             <h2>View Enquiries</h2>
             <p>Check incoming customer enquiries.</p>
+            <a href="{% url 'Company-notification' %}">View orders and notifications</a>
         </div>
     </div>
 </main>

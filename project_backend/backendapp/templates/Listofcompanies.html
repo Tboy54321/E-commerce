@@ -17,16 +17,23 @@
     <form class="search-bar" method="GET" action="{% url 'Companies' %}">
         <input type="text" name="q" placeholder="Search companies..." />
         <button type="submit">Search</button>
+    </form>
     </div>
 
     <main>
         <div class="company-list">
+            {% if companies %}
+            
             {% for company in companies %}
                 <div class="company-item">
-                    <a href="{% url 'Companies' %}?q={{ company.name }}">{{ company.name }}</a>
+                    <a href="{% url 'company_dashboard' company.id %}">{{ company.name }}</a>
                     <p>{{ company.email }}.</p>
+                    <a href="{% url 'contact_company' %}">Contact company</a>
                 </div>
             {% endfor %}
+            {% else %}
+            <h4>Your search did not match any company profile.</h4>
+            {% endif %}
             <!-- Add more companies here -->
         </div>
     </main>

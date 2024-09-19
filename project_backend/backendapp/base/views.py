@@ -13,7 +13,11 @@ from .models import Companies
 # ]
 
 def home(request):
-    companies = Companies.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    companies = Companies.objects.filter(
+        Q(name__icontains=q)
+    )
     context = {'companies': companies}
     return render (request, 'homepage.html', context)
 
@@ -35,6 +39,11 @@ def userlogin(request):
     context = {'form': formss}
     return render (request, 'Userlogin.html', context)
 
+
+def companylogin(request):
+    return render (request, 'Companylogin.html')
+
+
 def usereg(request):
     return render (request, 'Useregistration.html')
 
@@ -45,7 +54,9 @@ def aboutus(request):
 # Implementation of search functionality
 def companieslist(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    companies = Companies.objects.filter(Q(name__icontains=q))
+    companies = Companies.objects.filter(
+        Q(name__icontains=q)
+    )
     context = {'companies': companies}
     return render (request, 'Listofcompanies.html', context)
 
@@ -62,7 +73,6 @@ def companyreg(request):
 
     context = {'form': forms}
     return render (request, 'Companyreg.html', context)
-
 
 
 # Implementation of update functionality
@@ -88,13 +98,16 @@ def deleteCompanyInfo(request, pk):
 
     return render(request, 'delete.html', context)
     
-    
 
 def contactcompany(request):
     return render (request, 'Contactcompany.html')
 
-def companydashboard(request):
-    return render (request, 'Companydashboard.html')
+
+def companydashboard(request, pk):
+    company = Companies.objects.get(id=pk)
+    context = {'company': company}
+    return render (request, 'Companydashboard.html', context)
+
 
 def companyprofile(request):
     companies = Companies.objects.all()
