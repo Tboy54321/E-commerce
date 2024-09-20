@@ -18,7 +18,11 @@ Home Page
                     <li><a href="{% url 'Home' %}">Home</a></li>
                     <li><a href="{% url 'Companies' %}">Companies</a></li>
                     <li><a href="{% url 'Aboutus' %}">About</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'Userlogout' %}">UserLogout</a></li>
+                    {% else %}
                     <li><a href="{% url 'Userlogin' %}">UserLogin</a></li>
+                    {% endif %}
                     <li><a href="{% url 'Companylogin' %}">CompanyLogin</a></li>
                     <li><a href="{% url 'Usereg' %}">User Sign up</a></li>
                     <li><a href="{% url 'CompanyReg' %}">Register your company</a></li>

@@ -22,8 +22,13 @@
         </form> -->
         <form class="user-form" method="POST" action="">
             {% csrf_token %}
-            
-            {{ form }}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            <input type="text" placeholder="Enter your username" name="username">
+            <input type="password" placeholder="Enter your password" name="password">
             <input type="submit" value="Submit">
         </form>
     </main>

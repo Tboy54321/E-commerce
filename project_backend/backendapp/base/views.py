@@ -1,4 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 # from django.http import HttpResponse
 from .form import RegForm, LoginForm
@@ -28,17 +32,30 @@ def search_results(request, pk):
     # return render (request, 'searchresults.html')
 
 def userlogin(request):
-    formss = LoginForm()
-
     if request.method == "POST":
-        formss = LoginForm(request.POST)
-        if formss.is_valid():
-            formss.save()
-            return redirect('Home')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
+            return redirect ('Userlogin')
         
-    context = {'form': formss}
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect ('Home')
+        else:
+            messages.error(request, 'Invalid username or password')
+        
+    context = {}
     return render (request, 'Userlogin.html', context)
 
+def userlogout(request):
+    logout(request)
+    return redirect ('Home')
 
 def companylogin(request):
     return render (request, 'Companylogin.html')

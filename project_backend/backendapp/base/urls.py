@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.home, name="Home"),
     path('search/<str:pk>', views.search_results, name="searchresults"),
     path('user-sign-in/', views.userlogin, name='Userlogin'),
+    path('user-sign-out/', views.userlogout, name='Userlogout'),
     path('company-sign-in/', views.companylogin, name='Companylogin'),
     path('user-sign-up/', views.usereg, name='Usereg'),
     path('aboutus/', views.aboutus, name='Aboutus'),
