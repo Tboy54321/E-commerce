@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 # from django.http import HttpResponse
@@ -25,13 +27,18 @@ def home(request):
     context = {'companies': companies}
     return render (request, 'homepage.html', context)
 
+
 def search_results(request, pk):
     company = Companies.objects.get(id=pk)
     # print(name)
     return render (request, 'searchresults.html', {"company": company})
     # return render (request, 'searchresults.html')
 
+
 def userlogin(request):
+    if request.user.is_authenticated:
+        return redirect('Home')
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -53,16 +60,37 @@ def userlogin(request):
     context = {}
     return render (request, 'Userlogin.html', context)
 
+
 def userlogout(request):
     logout(request)
     return redirect ('Home')
 
+
+def usereg(request):
+    if request.user.is_authenticated:
+        return redirect('Home')
+
+    form = UserCreationForm()
+    context = {'form': form}
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('Home')
+        else:
+            messages.error(request, 'An error occured during registration')
+    
+    return render (request, 'Useregistration.html', context)
+    
+
+
 def companylogin(request):
     return render (request, 'Companylogin.html')
 
-
-def usereg(request):
-    return render (request, 'Useregistration.html')
 
 def aboutus(request):
     return render (request, 'Aboutus.html')
@@ -79,6 +107,7 @@ def companieslist(request):
 
 
 # Implementation of write functionality
+@login_required(login_url='Userlogin')
 def companyreg(request):
     forms = RegForm()
 
@@ -93,6 +122,7 @@ def companyreg(request):
 
 
 # Implementation of update functionality
+@login_required(login_url='Userlogin')
 def updateCompanyInfo(request, pk):
     company = Companies.objects.get(id=pk)
     form = RegForm(instance=company)
@@ -106,6 +136,7 @@ def updateCompanyInfo(request, pk):
 
 
 # Implementation of delete functionality
+@login_required(login_url='Userlogin')
 def deleteCompanyInfo(request, pk):
     company = Companies.objects.get(id=pk)
     context = {'obj': company}
@@ -115,11 +146,12 @@ def deleteCompanyInfo(request, pk):
 
     return render(request, 'delete.html', context)
     
-
+@login_required(login_url='Userlogin')
 def contactcompany(request):
     return render (request, 'Contactcompany.html')
 
 
+@login_required(login_url='Userlogin')
 def companydashboard(request, pk):
     company = Companies.objects.get(id=pk)
     context = {'company': company}
@@ -131,11 +163,14 @@ def companyprofile(request):
     context = {'companies': companies}
     return render (request, 'Companyprofile.html', context)
 
+@login_required(login_url='Userlogin')
 def usernotifcation(request):
     return render (request, 'Usernotification.html')
 
+@login_required(login_url='Userlogin')
 def companynotifcation(request):
     return render (request, 'Companynotification.html')
 
+@login_required(login_url='Userlogin')
 def contactus(request):
     return render (request, 'Contactus.html')
