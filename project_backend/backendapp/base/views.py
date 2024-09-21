@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 # from django.http import HttpResponse
-from .form import RegForm, LoginForm
+from .form import RegForm, LoginForm, UserForm
 from .models import Companies
 
 
@@ -70,11 +70,11 @@ def usereg(request):
     if request.user.is_authenticated:
         return redirect('Home')
 
-    form = UserCreationForm()
+    form = UserForm()
     context = {'form': form}
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
