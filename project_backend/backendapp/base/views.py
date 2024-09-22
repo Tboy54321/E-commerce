@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 # from django.http import HttpResponse
 from .form import RegForm, LoginForm, UserForm
-from .models import Companies
+from .models import Companies, CustomUser
 
 
 # Create your views here.
@@ -44,7 +44,7 @@ def userlogin(request):
         password = request.POST.get('password')
 
         try:
-            user = User.objects.get(username=username)
+            user = CustomUser.objects.get(username=username)
         except:
             messages.error(request, 'User does not exist')
             return redirect ('Userlogin')
