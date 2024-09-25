@@ -34,7 +34,7 @@ class Login(models.Model):
 class CustomUser(AbstractUser):
     ROLE_CHOICES = [
         ('admin', 'Admin'),
-        ('user', 'Admin'),
+        ('user', 'User'),
         ('company', 'Company')
     ]
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')

@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.db import IntegrityError
 # from django.http import HttpResponse
 from .form import RegForm, LoginForm, UserForm
 from .models import Companies, CustomUser
@@ -71,21 +72,25 @@ def usereg(request):
         return redirect('Home')
 
     form = UserForm()
-    context = {'form': form}
 
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('Home')
+            try:
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                login(request, user)
+                return redirect('Home')
+            except IntegrityError:
+                form.add_error('email', 'A user with this mail already exist.')
         else:
             messages.error(request, 'An error occured during registration')
-    
+    else:
+        form = UserForm()
+
+    context = {'form': form}    
     return render (request, 'Useregistration.html', context)
-    
 
 
 def companylogin(request):

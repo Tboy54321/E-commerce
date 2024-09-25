@@ -17,12 +17,22 @@
     <main>
         <form method="POST" action="">
             {% csrf_token %}
-            <ul class="messages">
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
+            {% if form.non_field_errors %}
+                <div>
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
             {{ form.as_p }}
+            {% if form.username.errors %}
+                <div>
+                    {{ form.username.errors }}
+                </div>
+            {% endif %}
+            {% if form.email.errors %}
+                <div>
+                    {{ form.email.errors }}
+                </div>
+            {% endif %}
             <input type="submit" value="Submit">
         </form>
     </main>
