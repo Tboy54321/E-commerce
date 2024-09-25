@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Settings
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/usersettings.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>User Settings</h1>
+    </header>
+
+    <main>
+        <div class="settings-container">
+            <div class="profile-section">
+                <h2>John Doe</h2>
+                <p class="username">@johndoe</p>
+                <p><strong>Email:</strong> johndoe@example.com</p>
+                <p><strong>Phone Number:</strong> +123 456 7890</p>
+                <p><strong>Address:</strong> 123 Main St, Springfield</p>
+            </div>
+
+            <div class="settings-actions">
+                <a href="{% url 'Passwordreset' %}" class="btn">Reset Password</a>
+                <a href="/update-profile.html" class="btn">Update Profile</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 AutoConnect</p>
+    </footer>
+{% endblock %}

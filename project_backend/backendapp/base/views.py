@@ -41,14 +41,29 @@ def userlogin(request):
         return redirect('Home')
 
     if request.method == "POST":
-        username = request.POST.get('username')
+        login_input = request.POST.get('username')
         password = request.POST.get('password')
 
-        try:
-            user = CustomUser.objects.get(username=username)
-        except:
-            messages.error(request, 'User does not exist')
+        if '@' in login_input:
+            try:
+                user = CustomUser.objects.get(email=login_input)
+                username = user.username
+            except:
+                messages.error(request, 'Email does not exist')
+                return redirect ('Userlogin')
+        elif login_input == "":
+            messages.error(request, "Please fill in username or email")
             return redirect ('Userlogin')
+        elif password == "":
+            messages.error(request, "Please fill in your password")
+            return redirect ('Userlogin')
+        else:
+            try:
+                user = CustomUser.objects.get(username=login_input)
+                username = login_input
+            except:
+                messages.error(request, 'Username does not exist')
+                return redirect ('Userlogin')
         
         user = authenticate(request, username=username, password=password)
 
@@ -60,6 +75,10 @@ def userlogin(request):
         
     context = {}
     return render (request, 'Userlogin.html', context)
+# Token-Based: Use JWT (JSON Web Tokens) or OAuth tokens for stateless authentication for logging in (DJANGO REST).
+# Password Encryption: Compare hashed passwords to stored values during authentication.
+# Login Attempts: Limit login attempts to prevent brute-force attacks.
+# Multi-Factor Authentication (MFA): Implement an additional layer of security like SMS/Email/Authenticator app verification.
 
 
 def userlogout(request):
@@ -179,3 +198,10 @@ def companynotifcation(request):
 @login_required(login_url='Userlogin')
 def contactus(request):
     return render (request, 'Contactus.html')
+
+@login_required(login_url='Userlogin')
+def settings(request):
+    return render (request, 'usersettings.html')
+
+def PasswordReset(request):
+    return render (request, 'passwordreset.html')

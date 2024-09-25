@@ -19,4 +19,6 @@ urlpatterns = [
     path('user-notification/', views.usernotifcation, name="User notification"),
     path('company-notification/', views.companynotifcation, name="Company-notification"),
     path('contactus/', views.contactus, name="Contact us"),
+    path('/settings', views.settings,  name='Settings'),
+    path('/passwordreset', views.PasswordReset,  name='Passwordreset'),
 ]

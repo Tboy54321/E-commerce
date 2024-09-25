@@ -45,4 +45,8 @@ class CustomUser(AbstractUser):
 
     def __str__(self) -> str:
         return self.username
-    
+
+# class CompanyProfile(AbstractUser):
+#     INDUSTRY_CHOICES = [
+#         ('automobile')
+#     ]

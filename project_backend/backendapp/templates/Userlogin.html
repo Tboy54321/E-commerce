@@ -27,12 +27,12 @@
                 <li>{{ message }}</li>
                 {% endfor %}
             </ul>
-            <input type="text" placeholder="Enter your username" name="username">
+            <input type="text" placeholder="Enter username or password" name="username">
             <input type="password" placeholder="Enter your password" name="password">
             <input type="submit" value="Submit">
         </form>
     </main>
-
+    <a href="{% url 'Passwordreset' %}">Reset Password</a>
     <footer>
         <p>&copy; 2024 AutoConnect</p>
     </footer>

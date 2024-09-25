@@ -14,8 +14,14 @@ class LoginForm(ModelForm):
         fields = "__all__"
 
 class UserForm(UserCreationForm):
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password'}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}))
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password'}),
+        help_text="Your password must be at least 8 characters long"
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password'}),
+        help_text="Enter the same password as above"
+    )
     class Meta:
         model = CustomUser
         fields = ['email', 'username', 'password1', 'password2', 'role']
