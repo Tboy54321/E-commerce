@@ -17,15 +17,15 @@ Settings
     <main>
         <div class="settings-container">
             <div class="profile-section">
-                <h2>John Doe</h2>
-                <p class="username">@johndoe</p>
-                <p><strong>Email:</strong> johndoe@example.com</p>
-                <p><strong>Phone Number:</strong> +123 456 7890</p>
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                <p class="username">@{{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Phone Number:</strong>{{ user.phone_number }}</p>
                 <p><strong>Address:</strong> 123 Main St, Springfield</p>
             </div>
 
             <div class="settings-actions">
-                <a href="{% url 'Passwordreset' %}" class="btn">Reset Password</a>
+                <a href="{% url 'password_reset' %}" class="btn">Reset Password</a>
                 <a href="/update-profile.html" class="btn">Update Profile</a>
             </div>
         </div>

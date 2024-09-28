@@ -30,9 +30,13 @@
             <input type="text" placeholder="Enter username or password" name="username">
             <input type="password" placeholder="Enter your password" name="password">
             <input type="submit" value="Submit">
+            <label>
+                <input type="checkbox" name="remember_me" id="remember_me">Remember me
+            </label>
+            
         </form>
     </main>
-    <a href="{% url 'Passwordreset' %}">Reset Password</a>
+    <a href="{% url 'password_reset' %}">Reset Password</a>
     <footer>
         <p>&copy; 2024 AutoConnect</p>
     </footer>

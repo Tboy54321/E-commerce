@@ -7,10 +7,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db import IntegrityError
+from django.conf import settings
+from decouple import config
 # from django.http import HttpResponse
-from .form import RegForm, LoginForm, UserForm
+from .form import CompanyForm, LoginForm, UserForm
 from .models import Companies, CustomUser
 
+
+SESSION_COOKIE_AGE = config('SESSION_COOKIE_AGE', default=6000, cast=int)
 
 # Create your views here.
 # context = [
@@ -43,6 +47,7 @@ def userlogin(request):
     if request.method == "POST":
         login_input = request.POST.get('username')
         password = request.POST.get('password')
+        remember_me = request.POST.get('remember_me')
 
         if '@' in login_input:
             try:
@@ -69,6 +74,11 @@ def userlogin(request):
 
         if user is not None:
             login(request, user)
+            if remember_me:
+                request.session.set_expiry(SESSION_COOKIE_AGE)
+            else:
+                request.session.set_expiry(0)
+
             return redirect ('Home')
         else:
             messages.error(request, 'Invalid username or password')
@@ -91,13 +101,14 @@ def usereg(request):
         return redirect('Home')
 
     form = UserForm()
-
+    
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
             try:
                 user = form.save(commit=False)
                 user.username = user.username.lower()
+                user.user_type = 'user'
                 user.save()
                 login(request, user)
                 return redirect('Home')
@@ -131,16 +142,29 @@ def companieslist(request):
 
 
 # Implementation of write functionality
-@login_required(login_url='Userlogin')
+# @login_required(login_url='Userlogin')
 def companyreg(request):
-    forms = RegForm()
+    if request.user.is_authenticated:
+        return redirect ('Home')
+    
+    forms = CompanyForm()
 
     if request.method == "POST":
-        forms = RegForm(request.POST)
+        forms = CompanyForm(request.POST)
         if forms.is_valid():
-            forms.save()
-            return redirect('Home')
-
+            try:
+                user = forms.save()
+                user.username = user.name.lower()
+                user.user_type = 'company'
+                user.save()
+                return redirect('Home')
+            except IntegrityError:
+                forms.add_error('email', 'Comapny with mail already exist')
+        else:
+            messages.error(request, 'An error occur during registration')
+    else:
+        forms = CompanyForm()
+        
     context = {'form': forms}
     return render (request, 'Companyreg.html', context)
 
@@ -149,9 +173,9 @@ def companyreg(request):
 @login_required(login_url='Userlogin')
 def updateCompanyInfo(request, pk):
     company = Companies.objects.get(id=pk)
-    form = RegForm(instance=company)
+    form = CompanyForm(instance=company)
     if request.method == "POST":
-        form = RegForm(request.POST, instance=company)
+        form = CompanyForm(request.POST, instance=company)
         if form.is_valid:
             form.save()
             return redirect('Home')
@@ -200,8 +224,7 @@ def contactus(request):
     return render (request, 'Contactus.html')
 
 @login_required(login_url='Userlogin')
-def settings(request):
-    return render (request, 'usersettings.html')
-
-def PasswordReset(request):
-    return render (request, 'passwordreset.html')
+def settings(request, pk):
+    user = CustomUser.objects.get(id=pk)
+    context = {'user': user}
+    return render (request, 'usersettings.html', context)

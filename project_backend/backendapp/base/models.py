@@ -5,17 +5,21 @@ from .managers import CustomUserManager
 # Create your models here.
 
 class Companies(models.Model):
-
-    INDUSTRY_CHOICES = {
-        ('automoobile', 'Automobile'),
-        ('spare parts', 'Spare Parts'),
-        ('services', 'Services'),
-    }
-
-    email = models.EmailField(unique=True)
-    name = models.CharField(max_length=255)
-    address = models.TextField()
-    industry_type = models.CharField(max_length=255, choices=INDUSTRY_CHOICES)
+    # profile_pic = models.ImageField()
+    name = models.CharField(max_length=255, null=False)
+    # registration_number = 
+    # company_type = 
+    email = models.EmailField(unique=True, max_length=255, null=False)
+    password = models.CharField(max_length=255, null=False)
+    confirm_password = models.CharField(max_length=255, null=False)
+    city = models.CharField(max_length=255)
+    country = models.CharField(max_length=100)
+    description = models.TextField()
+    active = models.BooleanField(default=True)
+    opening_hours = models.CharField(max_length=50)
+    address = models.TextField(null=False)
+    phone_number = models.IntegerField(unique=True, null=False)
+    # industry_type = models.CharField(max_length=255, choices=INDUSTRY_CHOICES)
     website = models.URLField(blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -38,6 +42,8 @@ class CustomUser(AbstractUser):
         ('company', 'Company')
     ]
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
+    phone_number = models.IntegerField(unique=True, null=True)
+    # profile_pic = models.ImageField()
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
@@ -46,7 +52,4 @@ class CustomUser(AbstractUser):
     def __str__(self) -> str:
         return self.username
 
-# class CompanyProfile(AbstractUser):
-#     INDUSTRY_CHOICES = [
-#         ('automobile')
-#     ]
+# USE ORM
